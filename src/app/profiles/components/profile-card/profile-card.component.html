@@ -1,0 +1,53 @@
+<mat-card class="profile-card">
+  <div class="profile-header" [ngClass]="'role-' + user?.role">
+    <div class="avatar">
+      <mat-icon class="avatar-icon" [matBadge]="user?.role === 'admin' ? 'A' : null"
+                matBadgeColor="warn"
+                [matTooltip]="user?.role === 'admin' ? 'Administrador' : user?.role === 'staff' ? 'Personal' : 'Huésped'">
+        {{ roleIcon }}
+      </mat-icon>
+    </div>
+    <h2 class="full-name">{{ fullName }}</h2>
+    <p class="role-tag" [ngClass]="roleColors[user?.role || '']">{{ user?.role }}</p>
+  </div>
+
+  <mat-card-content>
+    <mat-divider></mat-divider>
+
+    <div class="profile-info">
+      <div class="info-item">
+        <mat-icon>email</mat-icon>
+        <span>{{ user?.email }}</span>
+      </div>
+
+      <div class="info-item">
+        <mat-icon>phone</mat-icon>
+        <span>{{ user?.phone }}</span>
+      </div>
+
+      <div class="info-item" *ngIf="user?.department">
+        <mat-icon>work</mat-icon>
+        <span>{{ user?.department }}</span>
+      </div>
+
+      <div class="info-item">
+        <mat-icon>calendar_today</mat-icon>
+        <span>Usuario desde: {{ creationDate }}</span>
+      </div>
+
+      <div class="info-item">
+        <mat-icon>hotel</mat-icon>
+        <span>Hotel ID: {{ user?.hotelId }}</span>
+      </div>
+    </div>
+  </mat-card-content>
+
+  <mat-card-actions align="end">
+    <button mat-button color="primary">
+      <mat-icon>edit</mat-icon> Editar
+    </button>
+    <button mat-button color="accent">
+      <mat-icon>visibility</mat-icon> Ver
+    </button>
+  </mat-card-actions>
+</mat-card>

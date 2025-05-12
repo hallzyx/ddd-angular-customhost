@@ -1,0 +1,240 @@
+<div class="preferences-container">
+  <h2>Preferencias de Usuario</h2>
+
+  <form [formGroup]="preferencesForm" (ngSubmit)="onSubmit()">
+
+    <!-- SECCIÓN 1: PREFERENCIAS DE HABITACIÓN -->
+    <mat-card class="section-card" appearance="outlined">
+      <mat-card-header>
+        <mat-card-title style="padding-bottom: 20px">Preferencias de Habitación</mat-card-title>
+      </mat-card-header>
+
+      <mat-card-content formGroupName="roomPreferences">
+        <div class="form-row">
+          <mat-form-field appearance="outline">
+            <mat-label>Tipo de habitación preferida</mat-label>
+            <mat-select formControlName="preferredRoomType">
+              <mat-option *ngFor="let type of roomTypes" [value]="type">{{ type }}</mat-option>
+            </mat-select>
+<!--            <mat-error *ngIf="isInvalidControl(preferencesForm.get('roomPreferences'), 'preferredRoomType')">-->
+<!--              {{ errorMessagesForControl(preferencesForm.get('roomPreferences'), 'preferredRoomType') }}-->
+<!--            </mat-error>-->
+          </mat-form-field>
+
+          <mat-form-field appearance="outline">
+            <mat-label>Piso preferido</mat-label>
+            <mat-select formControlName="preferredFloor">
+              <mat-option *ngFor="let floor of floorPreferences" [value]="floor">{{ floor }}</mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+
+        <div class="form-row">
+          <mat-form-field appearance="outline">
+            <mat-label>Vista preferida</mat-label>
+            <mat-select formControlName="preferredView">
+              <mat-option *ngFor="let view of viewTypes" [value]="view">{{ view }}</mat-option>
+            </mat-select>
+          </mat-form-field>
+
+          <mat-form-field appearance="outline">
+            <mat-label>Tipo de almohada</mat-label>
+            <mat-select formControlName="pillowType">
+              <mat-option *ngFor="let pillow of pillowTypes" [value]="pillow">{{ pillow }}</mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+
+        <div class="form-row">
+          <div class="slider-container">
+            <label>Temperatura preferida (°C): {{ preferencesForm.get('roomPreferences.roomTemperature')?.value }}</label>
+<!--            <mat-slider min="18" max="28" step="1" discrete [displayWith]="formatTemp">-->
+<!--              <input matSliderThumb formControlName="roomTemperature">-->
+<!--            </mat-slider>-->
+          </div>
+        </div>
+
+        <div class="toggles">
+          <mat-slide-toggle formControlName="nonSmokingRoom">Habitación para no fumadores</mat-slide-toggle>
+          <mat-slide-toggle formControlName="quietRoom">Habitación silenciosa</mat-slide-toggle>
+          <mat-slide-toggle formControlName="extraBlankets">Mantas adicionales</mat-slide-toggle>
+        </div>
+      </mat-card-content>
+    </mat-card>
+
+    <!-- SECCIÓN 2: PREFERENCIAS DE ALIMENTACIÓN -->
+    <mat-card class="section-card" appearance="outlined">
+      <mat-card-header>
+        <mat-card-title style="padding-bottom: 20px">Preferencias de Alimentación</mat-card-title>
+      </mat-card-header>
+
+      <mat-card-content formGroupName="diningPreferences">
+        <div class="form-row">
+          <mat-form-field appearance="outline">
+            <mat-label>Restricciones alimenticias</mat-label>
+            <mat-select formControlName="dietaryRestrictions">
+              <mat-option *ngFor="let diet of dietaryRestrictions" [value]="diet">{{ diet }}</mat-option>
+            </mat-select>
+          </mat-form-field>
+
+          <mat-form-field appearance="outline">
+            <mat-label>Hora preferida para desayuno</mat-label>
+            <input matInput type="time" formControlName="breakfastTime">
+          </mat-form-field>
+        </div>
+
+        <div class="form-row">
+          <mat-form-field appearance="outline">
+            <mat-label>Preferencia para café/té</mat-label>
+            <mat-select formControlName="coffeeTeaPreference">
+              <mat-option value="Café">Café</mat-option>
+              <mat-option value="Té">Té</mat-option>
+              <mat-option value="Ambos">Ambos</mat-option>
+              <mat-option value="Ninguno">Ninguno</mat-option>
+            </mat-select>
+          </mat-form-field>
+
+          <mat-form-field appearance="outline">
+            <mat-label>Experiencia de comida preferida</mat-label>
+            <mat-select formControlName="diningExperience">
+              <mat-option value="Restaurante">Restaurante</mat-option>
+              <mat-option value="Room Service">Room Service</mat-option>
+              <mat-option value="Para llevar">Para llevar</mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+
+        <div class="toggles">
+          <mat-slide-toggle formControlName="breakfastIncluded">Incluir desayuno</mat-slide-toggle>
+          <mat-slide-toggle formControlName="minibarPreference">Utilizar minibar</mat-slide-toggle>
+        </div>
+      </mat-card-content>
+    </mat-card>
+
+    <!-- SECCIÓN 3: PREFERENCIAS DE SERVICIOS -->
+    <mat-card class="section-card" appearance="outlined">
+      <mat-card-header>
+        <mat-card-title style="padding-bottom: 20px">Preferencias de Servicios</mat-card-title>
+      </mat-card-header>
+
+      <mat-card-content formGroupName="servicePreferences">
+        <div class="form-row">
+          <mat-form-field appearance="outline">
+            <mat-label>Horario de limpieza</mat-label>
+            <mat-select formControlName="cleaningSchedule">
+              <mat-option value="Mañana">Mañana</mat-option>
+              <mat-option value="Tarde">Tarde</mat-option>
+              <mat-option value="NoMolestar">No molestar</mat-option>
+            </mat-select>
+          </mat-form-field>
+
+          <mat-form-field appearance="outline">
+            <mat-label>Preferencia de check-in</mat-label>
+            <mat-select formControlName="checkinPreference">
+              <mat-option value="Express">Check-in express</mat-option>
+              <mat-option value="Standard">Check-in estándar</mat-option>
+              <mat-option value="VIP">Check-in VIP</mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+
+        <div class="form-row">
+          <mat-form-field appearance="outline" class="full-width">
+            <mat-label>Servicios especiales solicitados</mat-label>
+            <textarea matInput formControlName="specialServices" placeholder="Describa cualquier servicio especial que necesite"></textarea>
+          </mat-form-field>
+        </div>
+
+        <div class="form-row">
+          <mat-form-field appearance="outline">
+            <mat-label>Preferencias de spa</mat-label>
+            <mat-select formControlName="spaPreferences">
+              <mat-option value="Masaje">Masaje</mat-option>
+              <mat-option value="Facial">Tratamiento facial</mat-option>
+              <mat-option value="Piscina">Piscina/Sauna</mat-option>
+              <mat-option value="Ninguno">Sin interés</mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+
+        <div class=" toggles">
+          <mat-slide-toggle formControlName="turndownService">Servicio de cobertura</mat-slide-toggle>
+          <mat-slide-toggle formControlName="wakeupCalls">Llamadas de despertador</mat-slide-toggle>
+          <mat-slide-toggle formControlName="newspaperDelivery">Entrega de periódico</mat-slide-toggle>
+          <mat-slide-toggle formControlName="parkingService">Servicio de estacionamiento</mat-slide-toggle>
+        </div>
+      </mat-card-content>
+    </mat-card>
+
+    <!-- SECCIÓN 4: COMUNICACIÓN Y NOTIFICACIONES -->
+    <mat-card class="section-card" appearance="outlined">
+      <mat-card-header>
+        <mat-card-title style="padding-bottom: 20px">Comunicación y Notificaciones</mat-card-title>
+      </mat-card-header>
+
+      <mat-card-content formGroupName="communicationPreferences">
+        <div class="form-row">
+          <mat-form-field appearance="outline">
+            <mat-label>Idioma preferido</mat-label>
+            <mat-select formControlName="preferredLanguage">
+              <mat-option *ngFor="let language of languageOptions" [value]="language">{{ language }}</mat-option>
+            </mat-select>
+<!--            <mat-error *ngIf="isInvalidControl(preferencesForm.get('communicationPreferences'), 'preferredLanguage')">-->
+<!--              {{ errorMessagesForControl(preferencesForm.get('communicationPreferences'), 'preferredLanguage') }}-->
+<!--            </mat-error>-->
+          </mat-form-field>
+
+          <mat-form-field appearance="outline">
+            <mat-label>Unidad de temperatura</mat-label>
+            <mat-select formControlName="temperatureUnit">
+              <mat-option *ngFor="let unit of temperatureUnits" [value]="unit">{{ unit }}</mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+
+        <div class="form-row">
+          <mat-form-field appearance="outline">
+            <mat-label>Moneda preferida</mat-label>
+            <mat-select formControlName="preferredCurrency">
+              <mat-option value="EUR">Euro (€)</mat-option>
+              <mat-option value="USD">Dólar ($)</mat-option>
+              <mat-option value="GBP">Libra Esterlina (£)</mat-option>
+            </mat-select>
+          </mat-form-field>
+
+          <mat-form-field appearance="outline">
+            <mat-label>Método de notificación</mat-label>
+            <mat-select formControlName="notificationMethod">
+              <mat-option *ngFor="let channel of communicationChannels" [value]="channel">{{ channel }}</mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+
+        <div class="form-row">
+          <mat-form-field appearance="outline">
+            <mat-label>Frecuencia de feedback</mat-label>
+            <mat-select formControlName="feedbackFrequency">
+              <mat-option value="Diario">Diario</mat-option>
+              <mat-option value="Al finalizar estancia">Al finalizar estancia</mat-option>
+              <mat-option value="Nunca">Nunca</mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+
+        <div class="toggles">
+          <mat-slide-toggle formControlName="receivePromotions">Recibir promociones</mat-slide-toggle>
+          <mat-slide-toggle formControlName="allowDataCollection">Permitir recopilación de datos para mejorar servicios</mat-slide-toggle>
+        </div>
+      </mat-card-content>
+    </mat-card>
+
+    <div class="button-row">
+      <button mat-button type="button" (click)="resetForm()">
+        Restablecer
+      </button>
+      <button mat-raised-button color="primary" type="submit" [disabled]="preferencesForm.invalid">
+        Guardar preferencias
+      </button>
+    </div>
+  </form>
+</div>

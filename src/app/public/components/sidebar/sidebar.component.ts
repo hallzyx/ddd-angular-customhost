@@ -6,7 +6,7 @@ import {
 } from '@angular/material/sidenav';
 import {MatListItem, MatNavList} from '@angular/material/list';
 import {MatIcon} from '@angular/material/icon';
-import {RouterLink, RouterOutlet} from '@angular/router';
+import {RouterModule} from '@angular/router';
 import {MatLine} from '@angular/material/core';
 import {NgForOf, NgIf} from '@angular/common';
 import { CommonModule } from '@angular/common';
@@ -18,10 +18,9 @@ import { Router } from '@angular/router';
   imports: [
     MatNavList,
     MatIcon,
-    RouterOutlet,
+    RouterModule,
     MatListItem,
     MatLine,
-    RouterLink,
     NgForOf,
     NgIf,
     MatDrawerContent,
@@ -54,7 +53,8 @@ export class SidebarComponent implements  OnInit{
   ];
   constructor(private router: Router) {}
   isActive(path: string): boolean {
-    return this.router.url === path;
+    return this.router.url.includes(path)
+
   }
   ngOnInit() {
     // Initialize any data or perform any setup tasks here

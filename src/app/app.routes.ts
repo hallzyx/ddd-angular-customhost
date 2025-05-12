@@ -19,6 +19,8 @@ const PreferencesComponent = () => import('./profiles/pages/preferences/preferen
 
 const PageNotFoundComponent = () => import('./public/pages/page-not-found/page-not-found.component').then(m => m.PageNotFoundComponent);
 
+const CustomerServicesCreateAndEditComponent = () => import('./crm/pages/customer-services-create-and-edit/customer-services-create-and-edit.component').then(m => m.CustomerServicesCreateAndEditComponent);
+
 export const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full', data: { title: 'Inicio' } },
   { path: 'home', component: HomeComponent, data: { title: 'Página Principal' } },
@@ -39,6 +41,7 @@ export const routes: Routes = [
       { path: 'bookings-tracker', loadComponent: BookingsTrackerComponent, data: { title: 'Seguimiento de Reservas' } },
       { path: 'customer-requests', loadComponent: CustomerRequestsComponent, data: { title: 'Solicitudes de Clientes' } },
       { path: 'customer-service', loadComponent: CustomerServiceComponent, data: { title: 'Atención al Cliente' } },
+      { path: 'customer-service/new', loadComponent: CustomerServicesCreateAndEditComponent, data: { title: 'New Customer service' } },
       { path: 'my-bookings', loadComponent: MyBookingsComponent, data: { title: 'Mis Reservas' } },
       { path: 'request-staff', loadComponent: RequestStaffComponent, data: { title: 'Solicitar Personal' } }
     ]

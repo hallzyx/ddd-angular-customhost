@@ -10,3 +10,8 @@
   color: var(--secondary-color) !important;
   border-radius: 0!important;
 }
+
+.border-box{
+  padding-left: 30px;
+  padding-right: 30px;
+}

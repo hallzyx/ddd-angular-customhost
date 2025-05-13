@@ -1,14 +1,28 @@
-import { Component } from '@angular/core';
-import {MyBookingsTableComponent} from '../../components/my-bookings-table/my-bookings-table.component';
+// src/app/crm/pages/mybookings/mybookings.component.ts
+import { Component, OnInit } from '@angular/core';
+import { BookingService } from '../../services/booking.service';
+import { Booking } from '../../models/booking.entity';
+import { MyBookingsTableComponent } from "../../components/my-bookings-table/my-bookings-table.component";
 
 @Component({
   selector: 'app-my-bookings',
-  imports: [
-    MyBookingsTableComponent
-  ],
   templateUrl: './my-bookings.component.html',
-  styleUrl: './my-bookings.component.css'
+  styleUrls: ['./my-bookings.component.css'],
+  imports: [MyBookingsTableComponent]
 })
-export class MyBookingsComponent {
+export class MyBookingsComponent implements OnInit {
+  bookings: Booking[] = [];
 
+  constructor(private bookingService: BookingService) { }
+
+  ngOnInit(): void {
+    this.bookingService.getBookings().subscribe(
+      (data: Booking[]) => {
+        this.bookings = data;
+      },
+      (error) => {
+        console.error('Error fetching bookings:', error);
+      }
+    );
+  }
 }

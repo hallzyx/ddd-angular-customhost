@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatTableModule } from '@angular/material/table';
 import { MatIconModule } from '@angular/material/icon';
@@ -31,6 +31,7 @@ interface Booking {
 
 })
 export class MyBookingsTableComponent {
+  @Input() bookings2: Booking[] = [];
   displayedColumns: string[] = ['id', 'roomId', 'checkInDate', 'checkOutDate', 'status', 'totalPrice', 'paymentStatus', 'specialRequests'];
   bookings: Booking[] = [
     {
